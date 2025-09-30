@@ -1,13 +1,25 @@
 package com.ecommerce.sb_ecom.model;
 
+import jakarta.persistence.*;
+
+@Entity
+        @Table (name = "categories")
 public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryID;
+
     private  String categoryName;
 
+    public Category() {
+    }
+
     public Category(Long categoryID, String categoryName) {
-        this.categoryID = categoryID;
+
         this.categoryName = categoryName;
     }
+
+
 
     public Long getCategoryID() {
         return categoryID;
