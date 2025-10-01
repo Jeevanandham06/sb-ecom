@@ -14,21 +14,20 @@ import java.util.Optional;
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
-    private CategoryRepository categoryRepository;  // ✅ ONLY NEED THIS
-
+    private CategoryRepository categoryRepository;
     @Override
     public List<Category> getAllCategories() {
-        return categoryRepository.findAll();  // ✅ CORRECT
+        return categoryRepository.findAll();
     }
 
     @Override
     public Category createCategory(Category category) {
-        return categoryRepository.save(category);  // ✅ CORRECT
+        return categoryRepository.save(category);
     }
 
     @Override
     public String deleteCategory(Long categoryId) {
-        // ✅ FIXED: Use repository directly
+
         Optional<Category> category = categoryRepository.findById(categoryId);
         if (category.isPresent()) {
             categoryRepository.deleteById(categoryId);
@@ -40,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category updateCategory(Category category, Long categoryId) {
-        // ✅ FIXED: Use repository instead of ArrayList
+
         Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
         if (optionalCategory.isPresent()) {
             Category existingCategory = optionalCategory.get();
