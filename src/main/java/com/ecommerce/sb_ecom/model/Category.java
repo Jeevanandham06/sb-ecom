@@ -1,15 +1,9 @@
 package com.ecommerce.sb_ecom.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
-        @Table (name = "categories")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "categories")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,5 +11,26 @@ public class Category {
 
     private String categoryName;
 
+    public Category() {
+    }
 
+    public Category(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public Long getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(Long categoryID) {
+        this.categoryID = categoryID;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }
