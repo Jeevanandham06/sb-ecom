@@ -1,65 +1,67 @@
-# Spring Boot E-Commerce API
+# E-Commerce Application
 
-## Project Overview
-Built a complete Spring Boot REST API for category management with proper architecture, validation, and exception handling.
+## Project: SB-Ecom (Spring Boot E-Commerce)
 
-## Architecture Implemented
+## Completed Features
 
+### 1. Project Setup & Configuration
+- Spring Boot 3.x application setup
+- Basic project structure
+- Maven/Gradle dependencies configured
 
-## Major Accomplishments
+### 2. Database Layer
+- Entity classes (Product, Category, User, Order, etc.)
+- JPA Repositories
+- Database relationships configured
 
-### 1. Centralized API Structure
-- RESTful endpoints organized under `/api` base path
-- Clear separation between public and admin routes
-- Consistent response formats across all endpoints
+### 3. Exception Handling - COMPLETED
+- Global Exception Handler with `@RestControllerAdvice`
+- Custom exceptions package: `com.ecommerce.sb_ecom.exceptions`
+- Proper HTTP status code mapping
+- Structured error responses
 
-### 2. Comprehensive Exception Handling
-- Global Exception Handler (`@RestControllerAdvice`)
-- Custom exceptions: `ResourceNotFoundException`, `APIException`
-- Proper HTTP status codes: 200, 201, 400, 404, 500
-- User-friendly error messages
+### 4. DTO Layer - COMPLETED
+- Data Transfer Objects implementation
+- Separation of persistence and presentation layers
+- Mapping between Entities and DTOs
+- Request/Response DTOs for all entities
 
-### 3. Validation & Business Rules
-- Duplicate category name prevention
-- Empty categories check with meaningful messages
-- Resource existence validation for update/delete operations
-
-### 4. Clean Code Practices
-- Service-Repository pattern implementation
-- Proper dependency injection with constructor injection
-- Consistent logging for debugging
-- Meaningful method names and structured code
-
-## Technical Stack
-- Spring Boot 3.5.4 with Java 21
-- Spring Data JPA for database operations
-- H2 In-Memory Database for development
-- Maven for dependency management
-- RESTful Web Services
+### 5. Pagination - COMPLETED
+- Spring Data JPA Pagination support
+- Pageable interface implementation
+- Custom PageResponse DTO
+- API endpoints with pagination parameters (`page`, `size`, `sort`)
 
 ## API Endpoints
 
-### Category Management
-| Method | Endpoint | Description | Status Codes |
-|--------|----------|-------------|-------------|
-| GET | `/api/public/categories` | Get all categories | 200, 400 |
-| POST | `/api/public/categories` | Create new category | 201, 400 |
-| PUT | `/api/public/categories/{id}` | Update category | 200, 404 |
-| DELETE | `/api/admin/categories/{id}` | Delete category | 200, 404 |
+### Product API
+- `GET /api/products` - Get all products (with pagination)
+- `GET /api/products/{id}` - Get product by ID
+- `POST /api/products` - Create new product
+- `PUT /api/products/{id}` - Update product
+- `DELETE /api/products/{id}` - Delete product
 
-## Getting Started
+### Category API
+- `GET /api/categories` - Get all categories (with pagination)
+- `GET /api/categories/{id}` - Get category by ID
+- `POST /api/categories` - Create new category
+- `PUT /api/categories/{id}` - Update category
+- `DELETE /api/categories/{id}` - Delete category
 
-1. Clone the repository
-2. Run `mvn spring-boot:run`
-3. Access API at `http://localhost:8081`
-4. H2 Console: `http://localhost:8081/h2-console`
+## Technical Implementation
 
-## Response Examples
+## Project Structure
+sb-ecom/
+├── src/main/java/com/ecommerce/sb_ecom/
+│   ├── controllers/
+│   ├── services/
+│   ├── repositories/
+│   ├── entities/
+│   ├── dtos/
+│   ├── exceptions/
+│   └── config/
+├── src/main/resources/
+│   ├── application.properties
+│   └── data.sql
+└── pom.xml
 
-**Success Response:**
-```json
-{
-    "message": "Category created successfully",
-    "categoryId": 1,
-    "categoryName": "Electronics"
-}

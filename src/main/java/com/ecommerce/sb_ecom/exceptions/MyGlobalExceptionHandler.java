@@ -1,11 +1,15 @@
 package com.ecommerce.sb_ecom.exceptions;
 
+import com.ecommerce.sb_ecom.exceptions.APIException;
+import com.ecommerce.sb_ecom.exceptions.ResourceNotFoundException;
+import com.ecommerce.sb_ecom.payload.APIResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,17 +29,22 @@ public class MyGlobalExceptionHandler {
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<String> handleResourceNotFound(ResourceNotFoundException e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<APIResponse> handleResourceNotFound(ResourceNotFoundException e) {
+        String message = e.getMessage();
+        APIResponse apiResponse = new APIResponse(message, false);
+        return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(APIException.class)
-    public ResponseEntity<String> handleAPIException(APIException e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<APIResponse> handleAPIException(APIException e) {
+        String message = e.getMessage();
+        APIResponse apiResponse = new APIResponse(message, false);
+        return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleAllExceptions(Exception e) {
-        return new ResponseEntity<>("Internal Server Error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<APIResponse> handleAllExceptions(Exception e) {
+        APIResponse apiResponse = new APIResponse("Internal Server Error: " + e.getMessage(), false);
+        return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

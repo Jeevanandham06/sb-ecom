@@ -7,8 +7,9 @@ import jakarta.persistence.*;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long categoryID;
+    private Long categoryId;
 
+    @Column(unique = true)
     private String categoryName;
 
     public Category() {
@@ -18,12 +19,12 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public Long getCategoryID() {
-        return categoryID;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryID(Long categoryID) {
-        this.categoryID = categoryID;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCategoryName() {
