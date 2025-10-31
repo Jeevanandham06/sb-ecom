@@ -1,17 +1,13 @@
 package com.ecommerce.sb_ecom.payload;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class APIResponse {
-    private String message;
+    public String message;
     private boolean status;
-
-    // Explicit constructor
-    public APIResponse(String message, boolean status) {
-        this.message = message;
-        this.status = status;
-    }
 }
