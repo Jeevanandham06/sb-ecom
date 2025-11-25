@@ -32,14 +32,7 @@ public class JwtUtils {
 
     @Value("${spring.ecom.app.jwtCookieName}")
     private  String jwtCookie;
-    @PostConstruct
-    public void checkProperties() {
-        System.out.println("=== JWT Properties ===");
-        System.out.println("JWT Secret: " + jwtSecret);
-        System.out.println("JWT Expiration: " + jwtExpirationMs);
-        System.out.println("JWT Cookie Name: " + jwtCookie);
-        System.out.println("=====================");
-    }
+
 
 
     public  String getJwtFromCookies(HttpServletRequest request){

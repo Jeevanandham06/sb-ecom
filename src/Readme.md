@@ -58,7 +58,7 @@
 ---
 
 ## 🎯 **Next Features**
-- Order Management & Shopping Cart
+- Order Management & Shopping Cart (working)
 - Payment Integration
 - Email Verification
 - Admin Dashboard
