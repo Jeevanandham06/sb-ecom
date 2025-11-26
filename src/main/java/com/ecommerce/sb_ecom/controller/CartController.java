@@ -5,9 +5,9 @@ import com.ecommerce.sb_ecom.payload.CartDTO;
 import com.ecommerce.sb_ecom.repositories.CartRepository;
 import com.ecommerce.sb_ecom.service.CartService;
 import com.ecommerce.sb_ecom.util.AuthUtil;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,4 +44,19 @@ public class CartController {
        CartDTO cartDTO=cartService.getCart(emailId, cartId);
                return new ResponseEntity<CartDTO>(cartDTO,HttpStatus.OK);
     }
+    @PutMapping("/cart/products/{productId}/quantity/{operation}")
+    public ResponseEntity<CartDTO>updateCartProduct(@PathVariable Long productId,
+                                                    @PathVariable String operation){
+         CartDTO cartDTO=cartService.updateProductQuantityInCart(productId,operation.equalsIgnoreCase("delete")?-1:1);
+         return  new ResponseEntity<CartDTO>(cartDTO,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/carts/{cartId}/product/{productId}")
+    public ResponseEntity<String>deleteProductFromCart(@PathVariable Long cartId,
+                                                        @PathVariable Long productId){
+         String status =cartService.deleteProductFromCart(cartId,productId);
+
+           return new ResponseEntity<String>(status,HttpStatus.OK);
+     }
+
 }
